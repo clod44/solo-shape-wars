@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://djxnunltbid7h"]
+
+[ext_resource type="Script" path="res://Scripts/bullet1.gd" id="1_xtmpf"]
+[ext_resource type="Script" path="res://Scripts/bullet_trail.gd" id="2_dcg4h"]
+[ext_resource type="AudioStream" uid="uid://cmnf6cao8vudt" path="res://Assets/Sounds/laserShoot.wav" id="5_vqst3"]
+
+[sub_resource type="Curve" id="Curve_2grx2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.954861, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_mkycc"]
+offsets = PackedFloat32Array(0, 0.548673, 0.613636, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0, 0, 1, 0.803922, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pejrb"]
+radius = 4.0
+
+[node name="Bullet1" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_xtmpf")
+
+[node name="ActiveEffects" type="Node" parent="."]
+
+[node name="BulletTrail" type="Line2D" parent="ActiveEffects"]
+width_curve = SubResource("Curve_2grx2")
+gradient = SubResource("Gradient_mkycc")
+script = ExtResource("2_dcg4h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pejrb")
+
+[node name="BulletSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_vqst3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

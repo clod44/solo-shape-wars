@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://dlebaphgu0t1v"]
+
+[ext_resource type="Script" path="res://Scripts/missile1.gd" id="1_ams0h"]
+[ext_resource type="Script" path="res://Scripts/bullet_trail.gd" id="2_hqm1p"]
+[ext_resource type="Texture2D" uid="uid://d1t4pf2v2lpqm" path="res://Assets/Textures/Particles/slash_04.png" id="3_trpa5"]
+[ext_resource type="AudioStream" uid="uid://cmnf6cao8vudt" path="res://Assets/Sounds/laserShoot.wav" id="4_yitsf"]
+
+[sub_resource type="Curve" id="Curve_2grx2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.954861, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_mkycc"]
+offsets = PackedFloat32Array(0, 0.548673)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pejrb"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2h7pu"]
+radius = 272.31
+
+[node name="Missile1" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 25
+max_contacts_reported = 1
+contact_monitor = true
+linear_damp = 5.0
+angular_damp = 10.0
+script = ExtResource("1_ams0h")
+missile_speed = 0.0
+missile_speed_variation = 0.0
+
+[node name="ActiveEffects" type="Node" parent="."]
+
+[node name="MissileTrail" type="Line2D" parent="ActiveEffects"]
+visible = false
+width = 20.0
+width_curve = SubResource("Curve_2grx2")
+gradient = SubResource("Gradient_mkycc")
+script = ExtResource("2_hqm1p")
+trail_length = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("3_trpa5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pejrb")
+
+[node name="MissileSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_yitsf")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_2h7pu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="draw" from="." to="." method="_on_draw"]

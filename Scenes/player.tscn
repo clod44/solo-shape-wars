@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://b4flanwwy12sn"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_jpwar"]
+[ext_resource type="Texture2D" uid="uid://b47cmpqn434s4" path="res://Assets/Textures/Main Ship - Base - Full health.png" id="2_6anej"]
+[ext_resource type="PackedScene" uid="uid://bl5tcs1jhuunh" path="res://Scenes/player_camera.tscn" id="3_wm25g"]
+[ext_resource type="Script" path="res://Scripts/weapons_manager.gd" id="4_oxx4b"]
+[ext_resource type="PackedScene" uid="uid://cdycb75eded1u" path="res://Scenes/weapon.tscn" id="4_voalr"]
+[ext_resource type="Script" path="res://Scripts/EngineTrail.gd" id="6_q0smk"]
+[ext_resource type="AudioStream" uid="uid://d4ijr2tf3otw" path="res://Assets/Sounds/jet_engine1.mp3" id="7_n6ihj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e1a6o"]
+radius = 10.0499
+
+[sub_resource type="Curve" id="Curve_pchph"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_37h1t"]
+offsets = PackedFloat32Array(0, 0.818182, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Player" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 25
+max_contacts_reported = 4
+contact_monitor = true
+linear_damp = 4.0
+angular_damp = 10.0
+script = ExtResource("1_jpwar")
+move_speed = 30.0
+
+[node name="EngineTrailPosition" type="Marker2D" parent="."]
+position = Vector2(-12, 0)
+gizmo_extents = 3.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e1a6o")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_6anej")
+metadata/_edit_lock_ = true
+
+[node name="PlayerCamera" parent="." instance=ExtResource("3_wm25g")]
+
+[node name="WeaponsManager" type="Node2D" parent="."]
+script = ExtResource("4_oxx4b")
+metadata/_edit_lock_ = true
+
+[node name="Weapon" parent="WeaponsManager" instance=ExtResource("4_voalr")]
+position = Vector2(5, 8)
+rotation = 1.5708
+fire_rate = 0.01
+
+[node name="Weapon2" parent="WeaponsManager" instance=ExtResource("4_voalr")]
+position = Vector2(5, -8)
+rotation = 1.5708
+fire_rate = 0.01
+
+[node name="ActiveEffects" type="Node" parent="."]
+
+[node name="EngineTrail" type="Line2D" parent="ActiveEffects"]
+points = PackedVector2Array(-11, 0)
+width_curve = SubResource("Curve_pchph")
+gradient = SubResource("Gradient_37h1t")
+script = ExtResource("6_q0smk")
+
+[node name="EngineSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_n6ihj")
+autoplay = true

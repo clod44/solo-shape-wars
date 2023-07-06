@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdycb75eded1u"]
+
+[ext_resource type="Script" path="res://Scripts/weapon.gd" id="1_5kxdm"]
+[ext_resource type="PackedScene" uid="uid://djxnunltbid7h" path="res://Scenes/bullet_1.tscn" id="2_g5gjo"]
+
+[node name="Weapon" type="Marker2D"]
+script = ExtResource("1_5kxdm")
+
+[node name="Magazine" type="Node" parent="."]
+
+[node name="Bullet1" parent="Magazine" instance=ExtResource("2_g5gjo")]
+isAmmo = true
+damage = 5
+damage_variety = 2
+bullet_speed = 1000.0
+
+[node name="ActiveBullets" type="Node" parent="."]

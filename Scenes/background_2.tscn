@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://orrh2esg1hb3"]
+
+[ext_resource type="Texture2D" uid="uid://dkj0qgnpskuvj" path="res://Assets/Textures/space.png" id="1_5wswe"]
+[ext_resource type="Texture2D" uid="uid://c1warfugchank" path="res://Assets/Textures/stars.png" id="2_5fx0s"]
+
+[node name="Background2" type="ParallaxBackground"]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(1200, 1200)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+scale = Vector2(6, 6)
+texture = ExtResource("1_5wswe")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(1200, 1200)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2"]
+scale = Vector2(6, 6)
+texture = ExtResource("2_5fx0s")
+centered = false

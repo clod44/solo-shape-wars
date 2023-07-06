@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://ds8i8vvjyj233"]
+
+[ext_resource type="PackedScene" uid="uid://b4flanwwy12sn" path="res://Scenes/player.tscn" id="1_doy53"]
+[ext_resource type="PackedScene" path="res://Scenes/background_3.tscn" id="1_mamiu"]
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_nf48i"]
+[ext_resource type="PackedScene" uid="uid://c2gvg842e0n3x" path="res://Scenes/enemy_spawner.tscn" id="2_fa6ni"]
+[ext_resource type="PackedScene" uid="uid://cbia4x8nq48fu" path="res://Scenes/hud.tscn" id="4_250lt"]
+
+[sub_resource type="Environment" id="Environment_olu22"]
+background_mode = 3
+glow_enabled = true
+glow_normalized = true
+glow_strength = 1.65
+glow_bloom = 0.06
+glow_blend_mode = 0
+glow_hdr_threshold = 0.83
+glow_hdr_scale = 1.0
+glow_map_strength = 1.0
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_nf48i")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_olu22")
+
+[node name="Background3" parent="." instance=ExtResource("1_mamiu")]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("2_fa6ni")]
+spawn_distance_variety = 250
+spawn_frequency = 3.0
+
+[node name="Player" parent="." instance=ExtResource("1_doy53")]
+metadata/_edit_lock_ = true
+
+[node name="ActiveEffects" type="Node" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("4_250lt")]

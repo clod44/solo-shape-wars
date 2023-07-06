@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3bpt76fa87o1"]
+
+[ext_resource type="Texture2D" uid="uid://blrps7cowq4fs" path="res://Assets/Textures/circle1.png" id="1_7moqi"]
+[ext_resource type="Script" path="res://Scripts/enemy_1.gd" id="1_lbh3d"]
+[ext_resource type="AudioStream" uid="uid://d1lv8ylrueaxx" path="res://Assets/Sounds/jet_engine2.mp3" id="3_ttq8i"]
+[ext_resource type="Script" path="res://Scripts/weapons_manager.gd" id="4_2ksr8"]
+[ext_resource type="PackedScene" uid="uid://cdycb75eded1u" path="res://Scenes/weapon.tscn" id="5_eicvc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yybpj"]
+radius = 16.0
+
+[node name="Enemy1" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 15
+max_contacts_reported = 3
+contact_monitor = true
+linear_damp = 1.0
+angular_damp = 5.0
+script = ExtResource("1_lbh3d")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yybpj")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7moqi")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="EngineSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ttq8i")
+autoplay = true
+metadata/_edit_lock_ = true
+
+[node name="WeaponsManager" type="Node2D" parent="."]
+script = ExtResource("4_2ksr8")
+isEnemy = true
+metadata/_edit_lock_ = true
+
+[node name="Weapon" parent="WeaponsManager" instance=ExtResource("5_eicvc")]
+position = Vector2(20, 0)
+rotation = 1.5708
+fire_rate = 0.4

@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdsrm2oue7q0h"]
+
+[ext_resource type="Script" path="res://Scripts/hit_effect_1.gd" id="1_xo04s"]
+
+[sub_resource type="Curve" id="Curve_f2g8j"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ckldg"]
+curve = SubResource("Curve_f2g8j")
+
+[sub_resource type="Curve" id="Curve_ioqgs"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0794872, 1), 0.0, 0.0, 0, 0, Vector2(0.98718, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hn8a6"]
+curve = SubResource("Curve_ioqgs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0x8ww"]
+emission_shape = 1
+emission_sphere_radius = 5.78
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 68.98
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 102.79
+initial_velocity_max = 794.39
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 100.0
+damping_max = 100.0
+damping_curve = SubResource("CurveTexture_ckldg")
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_hn8a6")
+
+[node name="HitEffect1" type="GPUParticles2D"]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_0x8ww")
+lifetime = 0.2
+explosiveness = 0.88
+trail_enabled = true
+trail_lifetime = 0.1
+trail_sections = 2
+trail_section_subdivisions = 1
+script = ExtResource("1_xo04s")
