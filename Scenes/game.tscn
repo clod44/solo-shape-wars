@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ds8i8vvjyj233"]
 
 [ext_resource type="PackedScene" uid="uid://b4flanwwy12sn" path="res://Scenes/player.tscn" id="1_doy53"]
-[ext_resource type="PackedScene" path="res://Scenes/background_3.tscn" id="1_mamiu"]
+[ext_resource type="PackedScene" uid="uid://btshoe77hwtog" path="res://Scenes/background_3.tscn" id="1_mamiu"]
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_nf48i"]
 [ext_resource type="PackedScene" uid="uid://c2gvg842e0n3x" path="res://Scenes/enemy_spawner.tscn" id="2_fa6ni"]
 [ext_resource type="PackedScene" uid="uid://cbia4x8nq48fu" path="res://Scenes/hud.tscn" id="4_250lt"]
